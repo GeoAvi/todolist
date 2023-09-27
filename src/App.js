@@ -5,9 +5,44 @@ import TodoForm from '../src/Components/TodoForm.js';
 import TodoItem from '../src/Components/TodoItems';
 
 function App() {
-  const [uncompletedTasks, setUncompletedTasks] = useState([]);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const [uncompletedTasks, setUncompletedTasks] = useState(() => {
+    const savedUncompletedTasks =
+      JSON.parse(localStorage.getItem('uncompletedTasks')) || [];
+    return savedUncompletedTasks;
+  });
+  const [completedTasks, setCompletedTasks] = useState(() => {
+    const savedCompletedTasks =
+      JSON.parse(localStorage.getItem('completedTasks')) || [];
+    return savedCompletedTasks;
+  });
+
   const [taskIdCounter, setTaskIdCounter] = useState(1);
+
+  useEffect(() => {
+    // Load task data from localStorage on component mount
+    const savedUncompletedTasks = JSON.parse(
+      localStorage.getItem('uncompletedTasks')
+    );
+    const savedCompletedTasks = JSON.parse(
+      localStorage.getItem('completedTasks')
+    );
+
+    if (savedUncompletedTasks) {
+      setUncompletedTasks(savedUncompletedTasks);
+    }
+
+    if (savedCompletedTasks) {
+      setCompletedTasks(savedCompletedTasks);
+    }
+    console.log('localStorage updated');
+  }, []); // Run this effect only once on component mount
+
+  useEffect(() => {
+    // Save task data to localStorage whenever tasks change
+    localStorage.setItem('uncompletedTasks', JSON.stringify(uncompletedTasks));
+    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+    console.log('localStorage on updated');
+  }, [uncompletedTasks, completedTasks]);
 
   const addTask = (text) => {
     const newTask = {
@@ -43,30 +78,6 @@ function App() {
     setCompletedTasks([]);
     setUncompletedTasks([]);
   };
-
-  useEffect(() => {
-    // Load task data from localStorage on component mount
-    const savedUncompletedTasks = JSON.parse(
-      localStorage.getItem('uncompletedTasks')
-    );
-    const savedCompletedTasks = JSON.parse(
-      localStorage.getItem('completedTasks')
-    );
-
-    if (savedUncompletedTasks) {
-      setUncompletedTasks(savedUncompletedTasks);
-    }
-
-    if (savedCompletedTasks) {
-      setCompletedTasks(savedCompletedTasks);
-    }
-  }, []); // Run this effect only once on component mount
-
-  useEffect(() => {
-    // Save task data to localStorage whenever tasks change
-    localStorage.setItem('uncompletedTasks', JSON.stringify(uncompletedTasks));
-    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-  }, [uncompletedTasks, completedTasks]);
 
   return (
     <div>
