@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+}
+
+.Nav_bar {
+  display: flex;
+  background: yellowgreen;
+  justify-content: center;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.Nav_bar span {
+  font-size: 30px;
+  color: black;
+  font-style: oblique;
+  font-family: cursive;
+  font-weight: 700;
+}
+.Reset {
+  display: flex;
+  justify-content: right;
+  margin-right: 10px;
+  align-items: center;
+}
+.Reset button {
+  margin: 2px;
+  font-size: 20px;
+  border-radius: 2px;
+  background-color: lightcoral;
+}
+.input_div {
+  padding: 10px;
+  display: flex;
+  place-content: center;
+}
+.input_div input {
+  display: flex;
+  text-align: center;
+  font-size: 20px;
+}
+
+.item_card {
+  width: 50%;
+  margin-left: 25%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  background-color: lightgrey;
+  padding: 6px;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+.item_card span {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
